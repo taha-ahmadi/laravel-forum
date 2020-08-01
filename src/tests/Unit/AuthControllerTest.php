@@ -16,7 +16,7 @@ class AuthControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_register_should_be_validate()
+    public function test_register_should_be_validated()
     {
         $response = $this->postJson(route("auth.register"));
 
@@ -44,7 +44,7 @@ class AuthControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_login_should_be_validate()
+    public function test_login_should_be_validated()
     {
         $response = $this->postJson(route("auth.register"));
 

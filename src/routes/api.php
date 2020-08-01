@@ -16,10 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix("v1/auth")->group(function ()
-{
-    Route::post("/register", "API\V01\Auth\AuthController@register")->name("auth.register");
-    Route::post("/login", "API\V01\Auth\AuthController@login")->name("auth.login");
-    Route::get('/user', "API\V01\Auth\AuthController@user")->name("auth.user");
-    Route::post("/logout", "API\V01\Auth\AuthController@logout")->name("auth.logout");
+Route::prefix("v1/")->group(function () {
+    Route::prefix("/auth")->group(function () {
+
+        Route::post("/register", "API\V01\Auth\AuthController@register")->name("auth.register");
+        Route::post("/login", "API\V01\Auth\AuthController@login")->name("auth.login");
+        Route::get('/user', "API\V01\Auth\AuthController@user")->name("auth.user");
+        Route::post("/logout", "API\V01\Auth\AuthController@logout")->name("auth.logout");
+    });
+
+    Route::prefix("/channel")->group(function () {
+        Route::get("/all", "API\V01\Channel\ChannelController@getAllChannelList")
+            ->name("channel.all");
+        Route::post("/create", "API\V01\Channel\ChannelController@createNewChannel")
+            ->name("channel.create");
+    });
 });
