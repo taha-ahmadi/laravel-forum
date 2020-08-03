@@ -17,7 +17,7 @@ class ChannelController extends Controller
      * Get All Channels
      * @return JsonResponse
      */
-    public function getAllChannelList()
+    public function getAllChannelsList()
     {
         $all_channels = resolve(ChannelRepository::class)->all();
         

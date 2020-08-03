@@ -12,6 +12,21 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_temp_user_role()
+    {
+        foreach(config("permission.default_roles") as $role){
+            \Spatie\Permission\Models\Role::create([
+                'name' => $role
+            ]);
+        }
+
+        foreach(config("permission.default_permissions") as $permission){
+            \Spatie\Permission\Models\Permission::create([
+                'name' => $permission
+            ]);
+        }
+    }
+    
     /**
      * Test Register Route
      *
@@ -31,6 +46,8 @@ class AuthTest extends TestCase
      */
     public function test_user_register()
     {
+        $this->test_temp_user_role();
+
         $response = $this->postJson(route("auth.register"), [
             "name" => "test",
             "email" => "aaaa@gmail.com",

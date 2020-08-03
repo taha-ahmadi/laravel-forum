@@ -1,3 +1,4 @@
 TODO:
-+ [] Permissions
-+ [] UI/UX
+- [] Permissions
+- [] Threads
+- [] UI/UX

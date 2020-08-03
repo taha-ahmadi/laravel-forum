@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\V01\Channel\ChannelController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\V01\Auth\AuthController;
 
 Route::prefix('/channel')->group(function () {
     Route::get('/all', [
