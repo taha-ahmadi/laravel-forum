@@ -1,4 +1,4 @@
 TODO:
-- [] Permissions
-- [] Threads
-- [] UI/UX
+- [x] Permissions
+- [ ] Threads
+- [ ] UI/UX
