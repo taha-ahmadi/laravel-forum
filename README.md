@@ -1,0 +1,3 @@
+TODO:
++ [] Permissions
++ [] UI/UX

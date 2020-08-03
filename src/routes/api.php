@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,25 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// API V1 Routes
+Route::prefix('v1/')->group(function () {
+    // Authentication Routes
+    include __DIR__ . '/v1/auth_routes.php';
 
+    // Channel Routes
+    include __DIR__ . '/v1/channels_routes.php';
 
-Route::prefix("v1/")->group(function () {
-    Route::prefix("/auth")->group(function () {
-
-        Route::post("/register", "API\V01\Auth\AuthController@register")->name("auth.register");
-        Route::post("/login", "API\V01\Auth\AuthController@login")->name("auth.login");
-        Route::get('/user', "API\V01\Auth\AuthController@user")->name("auth.user");
-        Route::post("/logout", "API\V01\Auth\AuthController@logout")->name("auth.logout");
-    });
-
-    Route::prefix("/channel")->group(function () {
-        Route::get("/all", "API\V01\Channel\ChannelController@getAllChannelList")
-            ->name("channel.all");
-        Route::post("/create", "API\V01\Channel\ChannelController@createNewChannel")
-            ->name("channel.create");
-        Route::put("/update", "API\V01\Channel\ChannelController@updateChannel")
-            ->name("channel.update");
-        Route::delete("/delete", "API\V01\Channel\ChannelController@deleteChannel")
-            ->name("channel.delete");
-    });
+    // Thread Routes
+    include __DIR__ . '/v1/threads_routes.php';
 });

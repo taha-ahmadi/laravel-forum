@@ -140,4 +140,18 @@ return [
 
         'store' => 'default',
     ],
+
+    'default_super_admin_email' => 'tahaahmadimail@protonmail.com',
+
+    'default_roles' => [
+        'super_admin',
+        'user',
+    ],
+
+    'default_permissions' => [
+        'user management',
+        'channel management',
+        'thread management',
+        'answers management',
+    ],
 ];

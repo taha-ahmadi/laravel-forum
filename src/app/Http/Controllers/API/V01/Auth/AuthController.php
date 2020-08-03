@@ -14,11 +14,11 @@ class AuthController extends Controller
 {
 
     /**
-    * Register User
-    * @method Post
-    * @method Request $request
-    * @return JsonResponse
-    */
+     * Register User
+     * @method Post
+     * @method Request $request
+     * @return JsonResponse
+     */
     public function register(Request $request)
     {
         // Validate Form Inputs
@@ -29,7 +29,12 @@ class AuthController extends Controller
         ]);
 
         // Add User To Database
-        resolve(UserRepository::class)->create($request);
+        $user = resolve(UserRepository::class)->create($request);
+
+        // Add User Premission
+        $superAdminEmail = config("permission.default_super_admin_email");
+        $user->email == $superAdminEmail ? $user->assignRole("super_admin") : $user->assignRole('user');
+
 
         return response()->json([
             'message' => "user created succesfully"
@@ -37,11 +42,11 @@ class AuthController extends Controller
     }
 
     /**
-    * Login User
-    * @method Post
-    * @method Request $request
-    * @return JsonResponse
-    */
+     * Login User
+     * @method Post
+     * @method Request $request
+     * @return JsonResponse
+     */
     public function login(Request $request)
     {
         // Validate Form Inputs
@@ -52,9 +57,9 @@ class AuthController extends Controller
 
         // Check User credentials.
         if (Auth::attempt($request->only(['email', 'password']))) {
-            return response()->json(Auth::user() ,Response::HTTP_OK);
+            return response()->json(Auth::user(), Response::HTTP_OK);
         }
-        
+
         throw ValidationException::withMessages([
             'email' => 'Incorrect credentials.',
         ]);
@@ -62,7 +67,7 @@ class AuthController extends Controller
 
     public function user()
     {
-        return response()->json(Auth::user() ,Response::HTTP_OK);
+        return response()->json(Auth::user(), Response::HTTP_OK);
     }
 
     public function logout()
@@ -71,6 +76,6 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Logged out'
-        ] ,Response::HTTP_OK);
+        ], Response::HTTP_OK);
     }
 }
